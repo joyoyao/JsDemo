@@ -8,8 +8,8 @@ import cookies from 'js-cookie';
 export default {
   namespace: 'home',
   state: {
-    user: {},
-    isLogin:cookies.get("userid")!=null?true:false,
+    user: {username:cookies.get("username")!=null?cookies.get("username"):""},
+    isLogin:cookies.get("token")!=null?true:false,
   },
 
 }

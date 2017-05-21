@@ -16,7 +16,8 @@ class Home extends React.Component {
     super(props);
     this.state = {
       isMode: false,
-      isLogin:props.isLogin
+      isLogin:props.isLogin,
+
     };
   }
 
@@ -41,17 +42,25 @@ class Home extends React.Component {
   }
 
   render() {
-    const children = [
+    // const children = [
+    //   <Nav id="nav_1_0" key="nav_1_0" isMode={this.state.isMode} isLogin={this.state.isLogin}/>,
+    //   <Content0 id="content_10_0" key="content_10_0" isMode={this.state.isMode}/>,
+    //   <Content1 id="content_9_0" key="content_9_0" isMode={this.state.isMode}/>,
+    //   <Footer id="footer_1_0" key="footer_1_0" isMode={this.state.isMode}/>,
+    // ];
 
+    // if(pa){
 
-      <Nav id="nav_1_0" key="nav_1_0" isMode={this.state.isMode} isLogin={this.state.isLogin}/>,
-      <Content0 id="content_10_0" key="content_10_0" isMode={this.state.isMode}/>,
-      <Content1 id="content_9_0" key="content_9_0" isMode={this.state.isMode}/>,
-      <Footer id="footer_1_0" key="footer_1_0" isMode={this.state.isMode}/>,
-    ];
+    // }
+// console.log("location"+this.props.location);
+
     return (
       <div className="templates-wrapper">
-        {children}
+              <Nav id="nav_1_0" key="nav_1_0" isMode={this.state.isMode} isLogin={this.state.isLogin} username={this
+            .props.username}/>
+              {this.props.children}
+              <Footer id="footer_1_0" key="footer_1_0" isMode={this.state.isMode}/>
+
       </div>
     );
   }
@@ -59,7 +68,8 @@ class Home extends React.Component {
 
 
 const mapStateToProps = (state) => {
-  return {"isLogin":state.home.isLogin}
+  console.log(state);
+  return {isLogin:state.home.isLogin,username:state.home.username}
 }
 
 export default connect(mapStateToProps)(Home)

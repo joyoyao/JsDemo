@@ -5,9 +5,9 @@ import cookies from 'js-cookie';
 import { message } from 'antd'
 
 export default {
-  namespace: 'login',
+  namespace: 'password',
   state: {
-    loginLoading: false,
+    passwordLoading: false,
   },
 
   effects: {
@@ -82,13 +82,13 @@ export default {
     showLoginLoading (state) {
       return {
         ...state,
-        loginLoading: true,
+        passwordLoading: true,
       }
     },
     hideLoginLoading (state) {
       return {
         ...state,
-        loginLoading: false,
+        passwordLoading: false,
       }
     },
   },

@@ -22,10 +22,34 @@ const Routers = function ({
           registerModel(app, require('./models/home'))
           cb(null, require('./routes/home'))
         }, 'home')
-      }
+      },
+      getIndexRoute(nextState, cb) {
+        require.ensure([], require => {
+          cb(null, {
+            component: require('./routes/home/Content.js')
+          })
+        }, 'content')
+      },
+      childRoutes: [{
+        path: 'register',
+        getComponent(nextState, cb) {
+          require.ensure([], require => {
+            registerModel(app, require('./models/login'))
+            cb(null, require('./routes/register/'))
+          }, 'register')
+        },
+      },{
+        path: 'login',
+        getComponent(nextState, cb) {
+          require.ensure([], require => {
+            registerModel(app, require('./models/login'))
+            cb(null, require('./routes/signin/'))
+          }, 'login')
+        },
+      }]
     },
     {
-      path: '/admin',
+      path: '/user',
       // component: App,
       getComponent(nextState, cb) {
         require.ensure([], require => {
@@ -50,15 +74,23 @@ const Routers = function ({
           }, 'dashboard')
         },
       }, {
-        path: 'user',
+        path: 'manager',
         getComponent(nextState, cb) {
           require.ensure([], require => {
             registerModel(app, require('./models/user'))
             cb(null, require('./routes/user/'))
           }, 'user')
         },
+      },{
+        path: 'password',
+        getComponent(nextState, cb) {
+          require.ensure([], require => {
+            registerModel(app, require('./models/password'))
+            cb(null, require('./routes/password/'))
+          }, 'password')
+        },
       }, {
-        path: 'user/:id',
+        path: ':id',
         getComponent(nextState, cb) {
           require.ensure([], require => {
             registerModel(app, require('./models/user/detail'))

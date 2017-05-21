@@ -65,16 +65,16 @@ const App = ({ children, location, dispatch, app, loading }) => {
     menu,
   }
 
-  if (config.openPages && config.openPages.indexOf(location.pathname) > -1) {
-    return <div>{children}</div>
-  }
+  // if (config.openPages && config.openPages.indexOf(location.pathname) > -1) {
+  //   return <div>{children}</div>
+  // }
 
   const { iconFontJS, iconFontCSS, logo } = config
 
   return (
     <div>
       <Helmet>
-        <title>ANTD ADMIN</title>
+        <title>FFDO USER</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href={logo} type="image/x-icon" />
         {iconFontJS && <script src={iconFontJS}></script>}

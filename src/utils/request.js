@@ -5,6 +5,7 @@ import jsonp from 'jsonp'
 import lodash from 'lodash'
 import pathToRegexp from 'path-to-regexp'
 import { message } from 'antd'
+import cookies from 'js-cookie';
 
 axios.defaults.baseURL = baseURL
 
@@ -35,6 +36,12 @@ const fetch = (options) => {
   } catch (e) {
     message.error(e.message)
   }
+  let token=cookies.get("token");
+  console.log("tokentoken"+token);
+  if(token!==null  && token !== undefined)
+  {
+    cloneData.headers={accesstoken: token}
+  }
 
   if (fetchType === 'JSONP') {
     return new Promise((resolve, reject) => {
@@ -53,7 +60,6 @@ const fetch = (options) => {
     url = `http://query.yahooapis.com/v1/public/yql?q=select * from json where url='${options.url}?${qs.stringify(options.data)}'&format=json`
     data = null
   }
-
   switch (method.toLowerCase()) {
     case 'get':
       return axios.get(url, {
@@ -87,6 +93,7 @@ export default function request (options) {
       }
     }
   }
+ console.log("options.fetchType "+options.fetchType )
 
   return fetch(options).then((response) => {
     const { statusText, status } = response

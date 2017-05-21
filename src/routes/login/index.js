@@ -37,7 +37,7 @@ const Login = ({
           {getFieldDecorator('username', {
             rules: [
               {
-                required: true,
+              required: true,
               },
             ],
           })(<Input size="large" onPressEnter={handleOk} placeholder="Username" />)}

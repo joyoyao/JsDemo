@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import TweenOne from 'rc-tween-one';
 import { Menu, Icon } from 'antd';
+import { browserHistory } from 'dva/router'
 
 const Item = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -18,13 +19,22 @@ class Header extends React.Component {
     });
   }
 
+   handleClick = (e) => {
+
+     if(e.key==="a"){ 
+        // this.props.history
+       browserHistory.push('/user');
+     }
+  }
+
   render() {
     const props = { ...this.props };
     const isMode = props.isMode;
     const isLogin = props.isLogin;
+    const username= props.username;
 
     delete props.isMode;
-    const navData = { menu1: '导航一', menu2: '导航二', menu3: '导航三', menu4: '导航四' };
+    const navData = { menu1: '首页', menu2: '价格', menu3: '下载', menu4: '导航四' };
     const navChildren = Object.keys(navData).map((key, i) => (<Item key={i}>
       {navData[key]}
     </Item>));
@@ -37,7 +47,7 @@ class Header extends React.Component {
         />
       </span>
       
-      <span>{ isLogin==true?"用户名":"费用和"
+      <span>{ isLogin===true?username:""
       }</span>
     </div>);
     navChildren.push((<Item className="help" key="help">
@@ -79,6 +89,7 @@ class Header extends React.Component {
             className={`${this.props.className}-phone-nav-text`}
           >
             <Menu
+             onClick={this.handleClick}
               defaultSelectedKeys={['0']}
               mode="inline"
               theme="dark"
